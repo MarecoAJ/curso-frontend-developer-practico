@@ -4,12 +4,14 @@ const menuIcon = document.querySelector(".menu");
 const mobileMenu = document.querySelector(".mobile-menu");
 const menuCarritoIcon = document.querySelector(".navbar-shopping-cart");
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer');
+const productDetailContainer = document.querySelector('#productDetail');
 const productList = [];
 const cardsContainer = document.querySelector(".cards-container");
-
+const productDetailClose = document.querySelector(".product-detail-close");
 navEmail.addEventListener("click", togggleDesktopMenu);
 menuIcon.addEventListener("click", toggleMobileMenu);
 menuCarritoIcon.addEventListener("click", toggleCarritoAside);
+productDetailClose.addEventListener("click", closeProductoDetailAside);
 
 function togggleDesktopMenu() {
     const isAsideClosed = shoppingCartContainer.classList.contains("inactive");
@@ -27,11 +29,14 @@ function toggleMobileMenu() {
     if (!isAsideClosed) {
         shoppingCartContainer.classList.add("inactive");
     }
+
+    closeProductoDetailAside();
 }
 
 function toggleCarritoAside() {
     const isMobileMenuClosed = mobileMenu.classList.contains("inactive");
     const isDesktopMenuClosed = desktopMenu.classList.contains("inactive");
+    const isProductDetailClose = productDetailClose.classList.contains("inactive");
 
     shoppingCartContainer.classList.toggle("inactive");
 
@@ -42,6 +47,19 @@ function toggleCarritoAside() {
     if (!isDesktopMenuClosed) {
         desktopMenu.classList.add("inactive");
     }
+    if (!isProductDetailClose) {
+        productDetailContainer.classList.add("inactive");
+    }
+
+}
+
+function openProductDetailAside(){
+    productDetailContainer.classList.remove("inactive");
+    shoppingCartContainer.classList.add("inactive");
+}
+
+function closeProductoDetailAside(){
+    productDetailContainer.classList.add("inactive");
 }
 
 productList.push({
@@ -74,6 +92,7 @@ for (producto of productList) {
 
     productCard.classList.add("product-card");
     img.setAttribute("src", producto.image);
+    img.addEventListener("click", openProductDetailAside);
     productInfo.classList.add("product-info");
     productPrice.innerText = "$" + producto.price;
     productName.innerText = producto.nameProduc;
