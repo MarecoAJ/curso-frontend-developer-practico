@@ -53,12 +53,12 @@ function toggleCarritoAside() {
 
 }
 
-function openProductDetailAside(){
+function openProductDetailAside() {
     productDetailContainer.classList.remove("inactive");
     shoppingCartContainer.classList.add("inactive");
 }
 
-function closeProductoDetailAside(){
+function closeProductoDetailAside() {
     productDetailContainer.classList.add("inactive");
 }
 
